@@ -2,5 +2,5 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-    site: 'https://ethan118.github.io',
+    site: 'https://ethanahn.ca',
 });
