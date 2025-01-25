@@ -1,0 +1,251 @@
+---
+import Layout from './Layout.astro';
+
+const { frontmatter, headings } = Astro.props;
+
+// Filter headings to include only h2 and h3 for the TOC
+const tocHeadings = headings.filter(h => h.depth <= 3);
+
+// Group headings by their parent H2
+const groupedHeadings = tocHeadings.reduce((acc, heading) => {
+    if (heading.depth === 2) {
+        acc.push({ h2: heading, children: [] });
+    } else if (heading.depth === 3 && acc.length > 0) {
+        acc[acc.length - 1].children.push(heading);
+    }
+    return acc;
+}, [] as Array<{ h2: typeof tocHeadings[0], children: typeof tocHeadings }>);
+---
+
+<Layout title={frontmatter.title}>
+    <article class="project-container">
+        <aside class="sidebar">
+            <div class="sidebar-content">
+                <a href="/projects" class="back-button">← Back to Projects</a>
+                <div class="toc">
+                    <h2 class="toc-title">Table of Contents</h2>
+                    <ul>
+                        {groupedHeadings.map(({ h2, children }) => (
+                            <li class="toc-item depth-2">
+                                <div class="toc-h2">
+                                    {children.length > 0 ? (
+                                        <button 
+                                            class="toggle-btn" 
+                                            aria-label="Toggle section"
+                                            aria-expanded="true"
+                                        >
+                                            <span class="toggle-icon">▼</span>
+                                        </button>
+                                    ) : (
+                                        <span class="toggle-spacer"></span>
+                                    )}
+                                    <a href={`#${h2.slug}`}>{h2.text}</a>
+                                </div>
+                                {children.length > 0 && (
+                                    <ul class="h3-list">
+                                        {children.map(h3 => (
+                                            <li class="toc-item depth-3">
+                                                <a href={`#${h3.slug}`}>{h3.text}</a>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                )}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
+        </aside>
+        <div class="project-content">
+            <slot />
+        </div>
+    </article>
+</Layout>
+
+<script>
+    // Add click handlers for toggle buttons
+    document.querySelectorAll('.toggle-btn').forEach(button => {
+        button.addEventListener('click', () => {
+            const h2Item = button.closest('.toc-item');
+            const h3List = h2Item?.querySelector('.h3-list');
+            const icon = button.querySelector('.toggle-icon');
+            
+            if (h3List && icon) {
+                const isExpanded = button.getAttribute('aria-expanded') === 'true';
+                button.setAttribute('aria-expanded', (!isExpanded).toString());
+                h3List.style.display = isExpanded ? 'none' : 'block';
+                icon.textContent = isExpanded ? '▶' : '▼';
+            }
+        });
+    });
+</script>
+
+<style>
+    .project-container {
+        display: grid;
+        grid-template-columns: minmax(200px, 1fr) minmax(0, 3fr);
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+
+    .sidebar {
+        position: relative;
+    }
+
+    .sidebar-content {
+        position: sticky;
+        top: 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .back-button {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        border-radius: 0.25rem;
+        background-color: var(--bg-secondary);
+        color: var(--text-color);
+        border: 1px solid var(--border-color);
+        transition: all 0.2s;
+        text-decoration: none;
+        text-align: center;
+    }
+
+    .back-button:hover {
+        background-color: var(--accent-color);
+        border-color: var(--accent-color);
+        color: var(--text-color);
+    }
+
+    .toc {
+        padding: 1rem;
+        background-color: var(--bg-secondary);
+        border-radius: 0.5rem;
+        border: 1px solid var(--border-color);
+    }
+
+    .toc-title {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid var(--border-color);
+        color: var(--text-color);
+    }
+
+    .toc ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .toc-item {
+        margin: 0.5rem 0;
+        line-height: 1.4;
+    }
+
+    .toc-h2 {
+        display: grid;
+        grid-template-columns: 20px 1fr;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .toggle-btn {
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        color: var(--text-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 20px;
+        height: 20px;
+    }
+
+    .toggle-spacer {
+        width: 20px;
+        height: 20px;
+    }
+
+    .toggle-icon {
+        font-size: 0.8rem;
+        transition: transform 0.2s;
+        line-height: 1;
+    }
+
+    .toggle-btn[aria-expanded="false"] .toggle-icon {
+        transform: rotate(-90deg);
+    }
+
+    .toc-item a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+
+    .toc-item a:hover {
+        color: var(--accent-color);
+    }
+
+    .depth-2 {
+        margin-left: 0;
+    }
+
+    .depth-3 {
+        margin-left: calc(20px + 0.5rem);
+        font-size: 0.9em;
+    }
+
+    .h3-list {
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .project-content {
+        max-width: 800px;
+    }
+
+    :global(img) {
+        max-width: 100%;
+        height: auto;
+        border-radius: 0.5rem;
+        margin: 1.5rem 0;
+    }
+
+    :global(.video-container) {
+        position: relative;
+        padding-bottom: 56.25%;
+        height: 0;
+        margin: 1.5rem 0;
+    }
+
+    :global(.video-container iframe) {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 0.5rem;
+    }
+
+    /* Make the layout responsive */
+    @media (max-width: 768px) {
+        .project-container {
+            grid-template-columns: 1fr;
+        }
+
+        .sidebar {
+            order: -1;
+        }
+
+        .sidebar-content {
+            position: relative;
+            top: 0;
+            margin-bottom: 2rem;
+        }
+    }
+</style>

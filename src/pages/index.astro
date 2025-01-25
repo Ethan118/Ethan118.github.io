@@ -1,0 +1,202 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Example gallery images - replace with your actual images
+const galleryImages = [
+	{
+		url: '/images/winding_mechanism.png',
+		alt: 'Gallery Image 1'
+	},
+	{
+		url: '/images/bobabot.JPG',
+		alt: 'Gallery Image 6'
+	},
+	{
+		url: '/images/thermistor.JPG',
+		alt: 'Gallery Image 2'
+	},
+	{
+		url: '/images/onsemi.JPG',
+		alt: 'Gallery Image 10'
+	},
+	{
+		url: '/images/aurora.JPEG',
+		alt: 'Gallery Image 3'
+	},
+	{
+		url: '/images/stars.JPG',
+		alt: 'Gallery Image 4'
+	},
+	{
+		url: '/images/dog.JPG',
+		alt: 'Gallery Image 5'
+	},
+	{
+		url: '/images/food.JPG',
+		alt: 'Gallery Image 7'
+	},
+	{
+		url: '/images/food2.JPG',
+		alt: 'Gallery Image 8'
+	},
+	{
+		url: '/images/moon.jpg',
+		alt: 'Gallery Image 9'
+	},
+];
+---
+
+<Layout title="Ethan Ahn - Mechatronics Engineering Student">
+	<div class="hero">
+		<h1>Hi, I'm Ethan Ahn!</h1>
+		<p class="subtitle">A Mechatronics Engineering Student @ UWaterloo</p>
+	</div>
+
+	<section class="intro">
+		<p>
+			Trying to make the world a cooler place through robotics and automation.
+		</p>
+		<p>
+			Currently trying to grow my skills in hardware, robotics, and controls theory.
+			Working on teaching a humanoid robot to play soccer through classical and reinforcement learning methods @ UW Robosoccer.
+		</p>
+		<div class="cta-buttons">
+			<a href="/projects" class="button">View My Projects</a>
+			<a href="/about" class="button secondary">About Me</a>
+		</div>
+	</section>
+
+	<section class="gallery">
+		<div class="gallery-grid">
+			{galleryImages.map(image => (
+				<div class="gallery-item">
+					<img src={image.url} alt={image.alt} loading="lazy" />
+				</div>
+			))}
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.hero {
+		text-align: center;
+		padding: 6rem 0 4rem;
+	}
+
+	h1 {
+		font-size: 4.5rem;
+		margin-bottom: 1rem;
+		line-height: 1.1;
+	}
+
+	.subtitle {
+		font-size: 1.75rem;
+		color: var(--accent-color);
+	}
+
+	.intro {
+		max-width: 800px;
+		margin: 0 auto;
+		text-align: center;
+		padding: 0 2rem;
+	}
+
+	.intro p {
+		font-size: 1.35rem;
+		line-height: 1.6;
+		margin-bottom: 2.5rem;
+	}
+
+	.cta-buttons {
+		display: flex;
+		gap: 1.5rem;
+		justify-content: center;
+		margin-bottom: 5rem;
+	}
+
+	.button {
+		font-size: 1.25rem;
+		padding: 1.25rem 2.5rem;
+	}
+
+	.gallery {
+		max-width: 1400px;
+		margin: 0 auto;
+		padding: 0 2rem;
+	}
+
+	.gallery-grid {
+		display: grid;
+		grid-template-columns: repeat(5, 1fr);
+		gap: 2rem;
+		margin-bottom: 5rem;
+	}
+
+	.gallery-item {
+		position: relative;
+		border-radius: 1.5rem;
+		overflow: hidden;
+		aspect-ratio: 4/3;
+		background: var(--bg-secondary);
+		border: 2px solid var(--border-color);
+	}
+
+	.gallery-item img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	@media (max-width: 1400px) {
+		.gallery-grid {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+
+	@media (max-width: 1024px) {
+		h1 {
+			font-size: 3.5rem;
+		}
+
+		.subtitle {
+			font-size: 1.5rem;
+		}
+
+		.gallery-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (max-width: 768px) {
+		.hero {
+			padding: 4rem 0 3rem;
+		}
+
+		h1 {
+			font-size: 2.75rem;
+		}
+
+		.subtitle {
+			font-size: 1.25rem;
+		}
+
+		.intro p {
+			font-size: 1.2rem;
+		}
+
+		.cta-buttons {
+			flex-direction: column;
+			gap: 1rem;
+		}
+
+		.button {
+			width: 100%;
+			text-align: center;
+		}
+
+		.gallery-grid {
+			grid-template-columns: 1fr;
+			gap: 1.5rem;
+		}
+	}
+</style>

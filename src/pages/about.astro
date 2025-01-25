@@ -1,0 +1,101 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="About Me">
+	<div class="about">
+		<h1>About Me</h1>
+		
+		<section>
+			<h2>Education</h2>
+			<p>Currently pursuing a degree in Mechatronics Engineering at the University of Waterloo.</p>
+		</section>
+
+		<section>
+			<h2>Interests</h2>
+			<ul class="interests-list">
+				<li>Tech: Humanoid Robotics, Reinforcement Learning</li>
+				<li>Science: Space & Astrophysics, Quantum physics, Anthropology</li>
+				<li>Activities: Snowboarding, Swimming, Soccer (playing not watching), Reading, Travel, Cooking</li>
+			</ul>
+		</section>
+
+		<section>
+			<h2>Experience</h2>
+			<div class="experience-item">
+				<h3>OS Developer at Huawei Canada</h3>
+				<p class="date">Sept 2024 - Dec 2024</p>
+				<p>Great opportunity to solve ambigous, open-ended problems in a flexible fast-paced environment</p>
+				<ul>
+					<li>Extended Seccomp capabilities to enable stateful, more expressive syscall filters</li>
+					<li>Wrote a compiler optimization script in LLVM toolchain to reduce size of the OS kernel binary</li>
+					<li>Researched novel approached to improving kernel performance and programmability</li>
+				</ul>
+			</div>
+			<div class="experience-item">
+				<h3>Firmware Developer at Onsemi</h3>
+				<p class="date">Jan 2024 - Apr 2024</p>
+				<p>First embedded co-op position with lots of learning and self-improvement</p>
+				<ul>
+					<li>Developed and tested drivers for I2C, SPI, and UART</li>
+					<li>Developed test script to test over 100+ audio codec configurations saving a week of manual work</li>
+					<li>Learned about Bluetooth LE and digital signal processing for audio applications</li>
+				</ul>
+			</div>
+			<div class="experience-item">
+				<h3>Software Developer at RBC</h3>
+				<p class="date">May 2023 - Aug 2023</p>
+				<p>Took a return offer from RBC after working there as a software developer during highschool</p>
+				<ul>
+					<li>Worked on the Multi-factor authentication service for Online Banking</li>
+					<li>Deployed and maintained code on the cloud using OpenShift</li>
+				</ul>
+			</div>
+		</section>
+	</div>
+</Layout>
+
+<style>
+	.about {
+		max-width: 800px;
+		margin: 0 auto;
+	}
+
+	section {
+		margin-bottom: 2.5rem;
+	}
+
+	h1 {
+		font-size: 2.5rem;
+		margin-bottom: 2rem;
+	}
+
+	h2 {
+		color: var(--accent-color);
+		border-bottom: 2px solid #e2e8f0;
+		padding-bottom: 0.5rem;
+	}
+
+	.interests-list {
+		list-style-type: none;
+		padding: 0;
+	}
+
+	.interests-list li {
+		margin: 0.5rem 0;
+	}
+
+	.experience-item {
+		margin-bottom: 1.5rem;
+	}
+
+	.date {
+		color: var(--accent-color);
+		font-size: 0.9rem;
+		margin: 0.25rem 0;
+	}
+
+	.experience-item ul {
+		padding-left: 1.5rem;
+	}
+</style>
