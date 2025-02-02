@@ -22,6 +22,18 @@ Beginning in Sept 2024, I started a small team alongside 7 other students to bui
 ### Jan 2025
 This month's goal is to read up on control theory and implement a simple balance controller for the robot.
 
+Read chapters 2-4 of [Introduction to Humanoid Robotics](https://link.springer.com/book/10.1007/978-3-642-54536-8) on modelling and control of humanoid robots. Learned about:
+- Robot kinematics and dynamics including rotation matrices, coordinate transforms, Rodrigues' formula, etc.
+- Zero moment point (ZMP) and its relation to balance
+- Linear inverted pendulum model (LIPM) and its use in walking pattern generation
+
+Setup Task Space Inverse Dynamics Control (TSID) in Python and implemented a simple balance controller for the robot by following a lecture series on TSID by [Andrea Del Prete](https://www.youtube.com/watch?v=lvsSnSl8fYE&list=PL4nPbSX5VFGhjPfdWK3nFhjtkY4yfjBnF).
+<video width="100%" height="auto" controls>
+    <source src="/videos/balance.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+
+
 ### Dec 2024
 This month's goal is to train some rudimentary skills like getting up, walking, and balance to get familiar with MuJoCo and Brax.
 
