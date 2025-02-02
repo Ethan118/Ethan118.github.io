@@ -1,11 +1,30 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { Github, Linkedin, Mail } from 'lucide-astro';
 ---
 
 <Layout title="About Me">
 	<div class="about">
 		<h1>About Me</h1>
 		
+		<section>
+			<h2>Contact</h2>
+			<div class="contact-links">
+				<a href="mailto:ethan@tower10labs.com" class="contact-item">
+					<Mail size={20} />
+					<span>Email</span>
+				</a>
+				<a href="https://www.linkedin.com/in/ethanahn/" target="_blank" class="contact-item">
+					<Linkedin size={20} />
+					<span>LinkedIn</span>
+				</a>
+				<a href="https://github.com/Ethan118" target="_blank" class="contact-item">
+					<Github size={20} />
+					<span>GitHub</span>
+				</a>
+			</div>
+		</section>
+
 		<section>
 			<h2>Education</h2>
 			<p>Currently pursuing a degree in Mechatronics Engineering at the University of Waterloo.</p>
@@ -97,5 +116,25 @@ import Layout from '../layouts/Layout.astro';
 
 	.experience-item ul {
 		padding-left: 1.5rem;
+	}
+
+	.contact-links {
+		display: flex;
+		gap: 2rem;
+		margin-top: 1rem;
+	}
+
+	.contact-item {
+		text-decoration: none;
+		color: var(--accent-color);
+		font-weight: 500;
+		transition: color 0.2s ease;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.contact-item:hover {
+		color: var(--accent-dark);
 	}
 </style>

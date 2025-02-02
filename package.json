@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@example/basics": "file:",
-    "astro": "^4.15.3"
+    "astro": "^4.15.3",
+    "lucide-astro": "^0.473.0"
   }
 }
