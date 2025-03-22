@@ -19,6 +19,21 @@ Beginning in Sept 2024, I started a small team alongside 7 other students to bui
 ![Robot Render](/images/uwrobosoccer_robot.png)
 
 ## Progress
+### Feb 2025
+This month we focused on developing a simple CoM control for our robot to maintain balance using TSID.
+
+Implemented CoM, feet, and posture trajectory tasks in TSID to maintain balance. 
+
+Added feet contact constraints to prevent the robot from falling through the ground - a problem we quickly encountered without any fixed joints added to the URDF model.
+The HQPsolver was producing errors after adding the fixed joints to the URDF model, most likely due to some conflicts between the constraints. This problem was temporarily fixed by changing the constraint to a task with a high weight.
+
+Something we noticed from the previous month is that due to the contact constraints the robot is not able to balance once it's center of mass is outside the support polygon. To allow the robot to overcome this limitation we looked into how we can make the robot stagger in this scenario to catch itself from falling. We eventually found a paper that describes an algorithm called capture point which is used to calculate the point that that the robot's foot must move to to regain balance. We plan to implement this in the next month. ([Capture Point: A Step toward Humanoid Push Recovery](https://ieeexplore.ieee.org/document/4115602))
+
+<video width="100%" height="auto" controls>
+    <source src="/videos/robot-fall.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+
 ### Jan 2025
 This month's goal is to read up on control theory and implement a simple balance controller for the robot.
 
