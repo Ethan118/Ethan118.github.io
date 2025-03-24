@@ -19,6 +19,16 @@ Beginning in Sept 2024, I started a small team alongside 7 other students to bui
 ![Robot Render](/images/uwrobosoccer_robot.png)
 
 ## Progress
+### Mar 2025
+This month we focused on developing a simple CoM control for our robot to maintain balance using TSID. We also started implementing a capture point algorithm to allow the robot to stagger and catch itself from falling.
+
+The CoM control finally works!! The solver outputs full body joint positions to control the CoM to follow a reference trajectory.
+
+<video width="100%" height="auto" controls>
+    <source src="/videos/robot_follow.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+
 ### Feb 2025
 This month we focused on developing a simple CoM control for our robot to maintain balance using TSID.
 
